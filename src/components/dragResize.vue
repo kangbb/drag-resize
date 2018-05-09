@@ -1,5 +1,5 @@
 <template>
-  <div id="region" @mousemove="moveHandler" @mousedown="downHandler" @mouseup="upHandler" @mouseover="overHandler">
+  <div id="region" @mousemove="moveHandler" @mousedown="downHandler" @mouseup="upHandler">
     <div id="region1" :style="{height: region1Height}">
       <div id="part1" :style="{width: part1Width }"></div>
       <div id="part2" :style="{width: part2Width}"></div>
@@ -116,11 +116,6 @@ export default {
       }
     },
     upHandler: function (e) {
-      this.mouseState = 'up'
-      this.onTopLine = false
-      this.onBottomLine = false
-    },
-    overHandler: function (e) {
       this.mouseState = 'up'
       this.onTopLine = false
       this.onBottomLine = false

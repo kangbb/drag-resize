@@ -1,30 +1,10 @@
 # drag-resize
 
-> A Vue.js project
+一个简单的鼠标拖动改变div大小的demo.
 
-## Build Setup
+## 有待改进
+1. 鼠标按下后，拖动div,期间鼠标移出窗口再移回窗口，依旧可以拖动div
+2. div更新不够准确
 
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
-```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## 预计改进方法
+采用`flex`布局，尝试改进

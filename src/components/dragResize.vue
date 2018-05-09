@@ -54,7 +54,6 @@ export default {
       return [p.left + w, p.top + h, w, h]
     },
     moveHandler: function (e) {
-      console.log(e)
       var X = e.clientX
       var Y = e.clientY
       // var clientX = window.$(document).width()

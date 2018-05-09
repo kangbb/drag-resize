@@ -56,17 +56,15 @@ export default {
     moveHandler: function (e) {
       var X = e.clientX
       var Y = e.clientY
-      // var clientX = window.$(document).width()
-      // var clientY = window.$(document).height()
       // 在part1和part2之间
       if (X >= this.topResizeLineX - 5 && X <= this.topResizeLineX + 5 &&
-        Y >= this.topResizeLineY - this.topResizeLineYWidth && Y <= this.topResizeLineY && 
+        Y >= this.topResizeLineY - this.topResizeLineYWidth && Y <= this.topResizeLineY &&
         this.mouseState !== 'down') {
         window.$('#region').addClass('col-resize')
         this.onTopLine = true
         return
       } else if (X >= this.bottomResizeLineX - this.bottomResizeLineXWidth && X <= this.bottomResizeLineX &&
-        Y >= this.bottomResizeLineY - 5 && Y < this.bottomResizeLineY + 5 && 
+        Y >= this.bottomResizeLineY - 5 && Y < this.bottomResizeLineY + 5 &&
         this.mouseState !== 'down') {
         // 在region1和region2之间
         window.$('#region').addClass('row-resize')
@@ -83,29 +81,31 @@ export default {
       }
 
       // 以上位置或者在其他位置，但是onmousedown
+      // 更新各个div大小
       var reg = /\d+/g
       var pos
       if (this.mouseState === 'down' && this.onTopLine) {
         var sub = X - this.topResizeLineX
         this.topResizeLineX = X
         this.part1Width = (parseInt(this.part1Width.match(reg)[0]) + sub) + 'px'
-        this.part2Width = (window.$('#part2').width() - sub) + 'px'
+        // 通过百分比更新，布局更加灵活
+        this.part2Width = 'calc(100% - ' + this.part1Width + ')'
 
-        // 设置part2 left值
+        // 设置part2 left值, 即为part1的宽度
         pos = window.$('#part2').offset()
-        window.$('#part2').offset({top: pos.top, left: pos.left + sub})
+        window.$('#part2').offset({top: pos.top, left: parseInt(this.part1Width.match(reg)[0])})
       } else if (this.mouseState === 'down' && this.onBottomLine) {
         // 修改div大小
         sub = Y - this.bottomResizeLineY
         this.bottomResizeLineY = Y
         this.region1Height = (parseInt(this.region1Height.match(reg)[0]) + sub) + 'px'
-        this.region2Height = (window.$('#region2').height() - sub) + 'px'
+        this.region2Height = 'calc(100% - ' + this.region1Height + ')'
         var h
         h = window.$('#part1').height()
         window.$('#part1').height(h + sub)
         h = window.$('#part2').height()
         window.$('#part2').height(h + sub)
-        // 设置region2 top值
+        // 设置region2 top值,即region1的高度
         pos = window.$('#region2').offset()
         window.$('#region2').offset({top: pos.top + sub, left: pos.left})
       }
